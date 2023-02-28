@@ -1,14 +1,16 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { ITodoRepository } from '../repositories';
+import { Todo } from '../schemas';
 
 @Injectable()
 export class UpdateTodo {
     constructor(private repository: ITodoRepository) {}
 
-    async execute(id: number): Promise<void> {
+    async execute(todo: Todo): Promise<Todo> {
         try {
-            await this.repository.update(id);
+            const newTodo = await this.repository.updateTodo(todo);
+            return newTodo;
         } catch (error) {
             throw error;
         }

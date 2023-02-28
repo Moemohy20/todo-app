@@ -9,7 +9,7 @@ export class AddTodo {
 
     async execute(Todo: Todo): Promise<Todo> {
         try {
-            const newTodo = await this.repository.add(Todo);
+            const newTodo = await this.repository.addTodo(Todo);
             return newTodo;
         } catch (error) {
             throw error;

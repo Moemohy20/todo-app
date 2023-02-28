@@ -9,7 +9,7 @@ export class GetAllTodos {
 
     async execute(): Promise<Todo[]> {
         try {
-            const allTodos = await this.repository.getAll();
+            const allTodos = await this.repository.getTodos();
             return allTodos;
         } catch (error) {
             throw error;

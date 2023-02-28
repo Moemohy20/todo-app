@@ -1,10 +1,9 @@
-/* eslint-disable prettier/prettier */
 import { Todo } from '../schemas';
 
 export interface ITodoRepository {
-    add(todo: Todo): Promise<Todo>
-    get(id: number): Promise<Todo>
-    getAll(): Promise<Todo[]>
-    update(id: number): Promise<void>
-    delete(id: number): Promise<boolean>
+    addTodo(todo: Todo): Promise<Todo>
+    getTodo(id: string): Promise<Todo>
+    getTodos(): Promise<Todo[]>
+    updateTodo(todo: Todo): Promise<Todo>
+    deleteTodo(id: string): Promise<void>
 }

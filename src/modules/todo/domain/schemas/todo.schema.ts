@@ -1,9 +1,9 @@
-/* eslint-disable prettier/prettier */
 export interface Todo {
-    id?: number;
-    title: string;
-    content: string;
-    status: Status
+    id?: string;
+    title?: string;
+    content?: string;
+    todoStatus?: Status;
+    listId?: string;
 }
 
 export enum Status {

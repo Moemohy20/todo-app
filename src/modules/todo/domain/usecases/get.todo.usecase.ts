@@ -7,9 +7,9 @@ import { ITodoRepository } from '../repositories';
 export class GetTodo {
     constructor(private repository: ITodoRepository) {}
 
-    async execute(id: number): Promise<Todo> {
+    async execute(id: string): Promise<Todo> {
         try {
-            const existingTodo = await this.repository.get(id);
+            const existingTodo = await this.repository.getTodo(id);
             return existingTodo;
         } catch (error) {
             throw error;

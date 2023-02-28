@@ -6,9 +6,9 @@ import { ITodoRepository } from '../repositories';
 export class DeleteTodo {
     constructor(private repository: ITodoRepository) {}
 
-    async execute(id: number): Promise<boolean> {
+    async execute(id: string): Promise<void> {
         try {
-            const myTodo = await this.repository.delete(id);
+            const myTodo = await this.repository.deleteTodo(id);
             return myTodo;
         } catch (error) {
             throw error;
