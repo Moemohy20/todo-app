@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
-
 import { FirestoreService } from 'src/core/providers';
-import { AddTodo, ITodoRepository } from './domain';
+import { AddTodo, DeleteTodo, GetAllTodos, GetTodo, ITodoRepository, UpdateTodo } from './domain';
 import { FirebaseTodoService, ITodoService, TodoRepository } from './infrastructure';
+import { TodoController } from './presentation';
 
 @Module({
     imports: [],
-    // controllers: [OrganizationController],
+    controllers: [TodoController],
     providers: [
         {
             inject: [FirestoreService],
@@ -19,11 +19,30 @@ import { FirebaseTodoService, ITodoService, TodoRepository } from './infrastruct
             useFactory: (service: ITodoService) => new TodoRepository(service),
         },
         {
-            inject: [ TodoRepository],
+            inject: [TodoRepository],
             provide: AddTodo,
             useFactory: (repository: ITodoRepository) => new AddTodo(repository),
+        },
+        {
+            inject: [TodoRepository],
+            provide: GetTodo,
+            useFactory: (repository: ITodoRepository) => new GetTodo(repository),
+        },
+        {
+            inject: [TodoRepository],
+            provide: GetAllTodos,
+            useFactory: (repository: ITodoRepository) => new GetAllTodos(repository),
+        },
+        {
+            inject: [TodoRepository],
+            provide: UpdateTodo,
+            useFactory: (repository: ITodoRepository) => new UpdateTodo(repository),
+        },
+        {
+            inject: [TodoRepository],
+            provide: DeleteTodo,
+            useFactory: (repository: ITodoRepository) => new DeleteTodo(repository),
         }
-
     ]
 })
 
