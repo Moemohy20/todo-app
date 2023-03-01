@@ -13,7 +13,7 @@ export class TodoRepository implements ITodoRepository {
     }
 
     getTodos(): Promise<Todo[]> {
-        return this.getTodos();
+        return this.service.getAll();
     }
 
     updateTodo(todo: Todo): Promise<Todo> {
