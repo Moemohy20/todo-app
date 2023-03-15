@@ -1,9 +1,10 @@
-import { Todo } from "../../domain"
+import { ITodo } from '../../domain';
 
 export interface ITodoService {
-    add(todo: Todo): Promise<Todo>
-    get(id: string): Promise<Todo>
-    getAll(): Promise<Todo[]>
-    update(todo: Todo): Promise<Todo>
-    delete(id: string): Promise<void>
+  add(todo: ITodo): Promise<ITodo>;
+  get(id: string): Promise<ITodo>;
+  getAll(): Promise<ITodo[]>;
+  query(field: string, operator: string, value: string): Promise<ITodo[]>;
+  update(todo: ITodo): Promise<ITodo>;
+  delete(id: string): Promise<void>;
 }

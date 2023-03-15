@@ -1,26 +1,31 @@
-import { ITodoRepository, Todo } from "../../domain";
-import { ITodoService } from "../services/todo.service.interface";
-
+import { Injectable, Inject } from '@nestjs/common';
+import { ITodoRepository, ITodo } from '../../domain';
+import { ITodoService } from '../services/todo.service.interface';
+@Injectable()
 export class TodoRepository implements ITodoRepository {
-    constructor(private service: ITodoService) {}
+  constructor(@Inject('TodoService') private readonly service: ITodoService) {}
 
-    addTodo(todo: Todo): Promise<Todo> {
-        return this.service.add(todo);
-    }
+  addTodo(todo: ITodo): Promise<ITodo> {
+    return this.service.add(todo);
+  }
 
-    getTodo(id: string): Promise<Todo> {
-        return this.service.get(id);
-    }
+  getTodo(id: string): Promise<ITodo> {
+    return this.service.get(id);
+  }
 
-    getTodos(): Promise<Todo[]> {
-        return this.service.getAll();
-    }
+  getListTodos(field: string, operator: string, value: string): Promise<ITodo[]> {
+    return this.service.query(field, operator, value);
+  }
 
-    updateTodo(todo: Todo): Promise<Todo> {
-        return this.service.update(todo);
-    }
+  getTodos(): Promise<ITodo[]> {
+    return this.service.getAll();
+  }
 
-    deleteTodo(id: string): Promise<void> {
-        return this.service.delete(id);
-    }
+  updateTodo(todo: ITodo): Promise<ITodo> {
+    return this.service.update(todo);
+  }
+
+  deleteTodo(id: string): Promise<void> {
+    return this.service.delete(id);
+  }
 }

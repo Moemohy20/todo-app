@@ -1,18 +1,18 @@
-/* eslint-disable prettier/prettier */
-import { Injectable } from '@nestjs/common';
-import { Todo } from '../schemas';
+import { Injectable, Inject } from '@nestjs/common';
+import { IUsecase } from 'src/core/interfaces';
+import { ITodo } from '../entities';
 import { ITodoRepository } from '../repositories';
 
 @Injectable()
-export class GetTodo {
-    constructor(private repository: ITodoRepository) {}
+export class GetTodo implements IUsecase {
+  constructor(@Inject('TodoRepository') private repository: ITodoRepository) {}
 
-    async execute(id: string): Promise<Todo> {
-        try {
-            const existingTodo = await this.repository.getTodo(id);
-            return existingTodo;
-        } catch (error) {
-            throw error;
-        }
+  async execute(id: string): Promise<ITodo> {
+    try {
+      const existingTodo = await this.repository.getTodo(id);
+      return existingTodo;
+    } catch (error) {
+      throw error;
     }
+  }
 }

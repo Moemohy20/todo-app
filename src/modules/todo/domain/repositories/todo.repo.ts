@@ -1,9 +1,10 @@
-import { Todo } from '../schemas';
+import { ITodo } from '../entities';
 
 export interface ITodoRepository {
-    addTodo(todo: Todo): Promise<Todo>
-    getTodo(id: string): Promise<Todo>
-    getTodos(): Promise<Todo[]>
-    updateTodo(todo: Todo): Promise<Todo>
-    deleteTodo(id: string): Promise<void>
+  addTodo(todo: ITodo): Promise<ITodo>;
+  getTodo(id: string): Promise<ITodo>;
+  getTodos(): Promise<ITodo[]>;
+  getListTodos(field: string, operator: string, value: string): Promise<ITodo[]>;
+  updateTodo(todo: ITodo): Promise<ITodo>;
+  deleteTodo(id: string): Promise<void>;
 }

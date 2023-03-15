@@ -127,14 +127,6 @@ export class FirestoreService {
     return getDoc<T>(reference);
   }
 
-      /**
-     * Get document
-     */
-      getDocument(collectionName: string, documentId: string): Observable<any>
-      {
-          return docData(doc(this._firestore, collectionName, documentId.toString()), { idField: 'id' })
-      }
-
   /**
    * Executes the query and returns the results as a QuerySnapshot.
    */

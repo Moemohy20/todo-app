@@ -1,5 +1,12 @@
-import { Module } from '@nestjs/common';
-import { firebaseConfigs, FirebaseModule } from './core';
+import { Logger, Module, Scope } from '@nestjs/common';
+import { APP_INTERCEPTOR, APP_FILTER } from '@nestjs/core';
+import {
+  firebaseConfigs,
+  FirebaseModule,
+  HttpExceptionFilter,
+  LoggingInterceptor,
+  ResponseInterceptor,
+} from './core';
 import { TodoModule } from './modules/todo/todo.module';
 
 @Module({
@@ -14,6 +21,21 @@ import { TodoModule } from './modules/todo/todo.module';
     TodoModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    Logger,
+    {
+      provide: APP_INTERCEPTOR,
+      scope: Scope.REQUEST,
+      useClass: LoggingInterceptor,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ResponseInterceptor,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
+  ],
 })
 export class AppModule {}
