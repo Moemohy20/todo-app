@@ -7,7 +7,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const config = new DocumentBuilder()
-    .setTitle('Cats example')
+    .setTitle('Todo App')
     .setDescription('The Todo API description')
     .setVersion('1.0')
     .addTag('Todo Documentations')
@@ -26,4 +26,3 @@ async function bootstrap() {
   await app.listen(3000);
 }
 bootstrap();
-
